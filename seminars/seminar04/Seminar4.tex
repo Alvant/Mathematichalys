@@ -783,8 +783,8 @@
       Таким образом, в данном примере нужно бы было каким-то образом раскладывать корень не до $o(x)$, а до какой-то более высокой точности (до ещё более малой поправки)...
     }\textsuperscript{,}\footnote{
       Или не ``забыть'', а сделать так:
-      $\lim_{x \to 0} \left(1 \hm- \frac{1}{2}\, x \hm+ o(x)\right)^{1 \hm/ x} \hm= \lim_{x \to 0} \exp\left\{ \ln{\left(1 \hm- \frac{1}{2}\, x \hm+ o(x)\right)} \hm/ x \right\}$.
-      И тогда всё сводится в рассмотрению предела степени, а там уже стоит дробь, и можно заменять на эквивалентные.
+      $\lim_{x \to 0} \left(1 \hm- \frac{1}{2}\, x \hm+ o(x)\right)^{1 \hm/ x} \hm= \lim_{x \to 0} \exp\left\{ \ln{\left(1 \hm- \frac{1}{2}\, x \hm+ o(x)\right)} \hm{\big/} x \right\}$.
+      И тогда всё сводится к рассмотрению предела степени, а там уже стоит дробь, и можно заменять на эквивалентные.
     }
     \[
       \blacktriangle = \lim_{x \to 0} \left(1 - \frac{x}{2}\right)^{\frac{1}{x}} = \spadesuit
@@ -927,35 +927,34 @@
     \lim_{x \to x_0} f(x) = f(x_0)
   \]
 
-  Пользуясь определениями предела функции, можно это расписать подробнее (в двух вариантах~---~по Коши и по Гейне).\footnote{
-    Далее фактически скопированы определения пределов по Коши~\eqref{eq:koshi} и по Гейне~\eqref{eq:giyne}.
-    Скопированы~---~но с \textcolor{pink}{небольшими изменениями}.
-  }
+  Пользуясь определениями предела функции, можно это расписать подробнее (в двух вариантах~---~по Коши и по Гейне).
+  (Далее фактически скопированы определения пределов по Коши~\eqref{eq:koshi} и по Гейне~\eqref{eq:giyne}.
+  Скопированы~---~но с небольшими изменениями...)
 
   \begin{definition}[``Непрерывность в точке по Коши'']
-    Пусть функция~$f(x)$ определена в некоторой \textcolor{pink}{$\delta_0$-окрестности} точки~$x_0$.
+    Пусть функция~$f(x)$ определена в некоторой $\delta_0$-окрестности точки~$x_0$.
 
     Функция~$f(x)$ называется непрерывной в точке~$x_0 \hm\in \RR \hm\cup \{\pm \infty, \infty\}$, если
     \begin{equation}
-      \forall \eps > 0\ \exists \delta > 0\colon \forall x \in \textcolor{pink}{U_{\delta}(x_0)} \to f(x) \in U_{\eps}(a)
+      \forall \eps > 0\ \exists \delta > 0\colon \forall x \in U_{\delta}(x_0) \to f(x) \in U_{\eps}(a)
     \end{equation}
 
     Если и $x_0$, и $a$~---~это просто числа, то можно написать и так:
     \[
-      \forall \eps > 0\ \exists \delta > 0\colon \forall x\colon \textcolor{pink}{|x - x_0| < \delta} \to |f(x) - a| < \eps
+      \forall \eps > 0\ \exists \delta > 0\colon \forall x\colon |x - x_0| < \delta \to |f(x) - a| < \eps
     \]
   \end{definition}
 
   \begin{definition}[``Непрерывность в точке по Гейне'']
-    Пусть функция~$f(x)$ определена в некоторой \textcolor{pink}{$\delta_0$-окрестности} точки~$x_0$.
+    Пусть функция~$f(x)$ определена в некоторой $\delta_0$-окрестности точки~$x_0$.
 
     Функция~$f(x)$ называется непрерывной в точке~$x_0 \hm\in \RR \hm\cup \{\pm \infty, \infty\}$, если
     \begin{equation}
-      \forall \{x_n\}_{n=1}^{\infty}\colon \textcolor{pink}{\left\{
+      \forall \{x_n\}_{n=1}^{\infty}\colon \left\{
         \begin{aligned}
           &\lim_{n \to \infty} x_n = x_0\\
         \end{aligned}
-      \right.}
+      \right.
       \to \lim_{n \to \infty} f(x_n) = a
     \end{equation}
     (то есть теперь последовательность просто должна сходиться к~$x_0$~---~возможно, попадая при этом и в саму~$x_0$).
