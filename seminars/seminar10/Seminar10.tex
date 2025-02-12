@@ -1,0 +1,254 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{mystyle}
+
+\usepackage{gensymb}
+\usepackage{scalerel}
+\usepackage{stackengine}
+
+% \usepackage{skull}  % skull
+\usepackage{halloweenmath}  % \bigpumpkin, skull (https://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf -- Table 76)
+
+\usepackage{tikzsymbols}
+
+% https://tex.stackexchange.com/questions/3266/how-do-i-use-a-circle-as-a-math-accent-larger-than-mathring
+% https://tex.stackexchange.com/a/3270/135045
+\usepackage{accents}
+
+\renewcommand{\mathring}[1]{\accentset{\circ}{#1}}
+
+
+\graphicspath{ {images/} }
+
+
+% https://tex.stackexchange.com/questions/5461/is-it-possible-to-change-the-size-of-an-arrowhead-in-tikz-pgf
+\usetikzlibrary{arrows.meta}
+
+
+\DeclareMathOperator{\Image}{Im}
+
+\definecolor{pink}{RGB}{218, 3, 174}
+\definecolor{violet}{RGB}{148, 0, 211}
+\definecolor{green}{RGB}{0, 153, 0}
+\definecolor{orange}{RGB}{255, 153, 0}
+\definecolor{blue}{RGB}{5, 73, 255}
+\definecolor{cyan}{RGB}{31, 206, 203}
+\definecolor{cyan2}{RGB}{0, 166, 147}
+\definecolor{cyangreen}{RGB}{0, 155, 118}
+\definecolor{cyangreen2}{RGB}{0, 109, 91}
+
+
+% https://tex.stackexchange.com/a/101138/135045
+
+\newcommand\widesim[1]{\ThisStyle{%
+  \setbox0=\hbox{$\SavedStyle#1$}%
+  \stackengine{-.1\LMpt}{$\SavedStyle#1$}{%
+    \stretchto{\scaleto{\SavedStyle\mkern.2mu\sim}{.5150\wd0}}{.6\ht0}%
+  }{O}{c}{F}{T}{S}%
+}}
+
+
+\newcommand{\BigMiddleThree}{\;\left|\vphantom{\begin{pmatrix} 0\\0\\0 \end{pmatrix}}\right.\;}
+\newcommand{\BigMiddleFour}{\;\left|\vphantom{\begin{pmatrix} 0\\0\\0\\0 \end{pmatrix}}\right.\;}
+
+
+% https://tex.stackexchange.com/questions/63531/how-to-write-quotation-marks-in-math-environment
+\DeclareMathSymbol{\mlq}{\mathord}{operators}{``}
+\DeclareMathSymbol{\mrq}{\mathord}{operators}{`'}
+
+
+\DeclareMathOperator{\Imag}{Im}
+
+
+% https://tex.stackexchange.com/questions/544453/undefined-control-sequence-after-paragraph
+\renewcommand{\paragraph}[1]{\noindent\textbf{#1}\quad}
+
+
+% https://tex.stackexchange.com/questions/36851/skipping-line-after-proof-in-proof-environment#comment73553_36851
+\newcommand{\proofindent}{\hspace*{\fill}\par\vspace{0.5em}\noindent}
+
+
+% https://tex.stackexchange.com/questions/4813/extendible-equals-sign
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+\newcommand*{\xeq}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+\makeatother
+
+
+% https://tex.stackexchange.com/questions/279100/typeset-the-shrug-%C2%AF-%E3%83%84-%C2%AF-emoji
+\newcommand{\shrug}[1][]{%
+\begin{tikzpicture}[baseline,x=0.8\ht\strutbox,y=0.8\ht\strutbox,line width=0.125ex,#1]
+  \def\arm{(-2.5,0.95) to (-2,0.95) (-1.9,1) to (-1.5,0) (-1.35,0) to (-0.8,0)};
+  \draw \arm;
+  \draw[xscale=-1] \arm;
+  \def\headpart{(0.6,0) arc[start angle=-40, end angle=40,x radius=0.6,y radius=0.8]};
+  \draw \headpart;
+  \draw[xscale=-1] \headpart;
+  \def\eye{(-0.075,0.15) .. controls (0.02,0) .. (0.075,-0.15)};
+  \draw[shift={(-0.3,0.8)}] \eye;
+  \draw[shift={(0,0.85)}] \eye;
+  % draw mouth
+  \draw (-0.1,0.2) to [out=15,in=-100] (0.4,0.95); 
+\end{tikzpicture}}
+
+
+
+% https://tex.stackexchange.com/a/314638/135045
+% \newcommand{\diff}{\mathop{}\!d\!}
+\newcommand{\diff}{\mathop{}\!d}
+
+
+\author{Алексеев Василий}
+
+
+\title{Семинар 10}
+\date{18 ноября 2024}
+
+
+\begin{document}
+  \maketitle
+  
+  \tableofcontents
+
+  \thispagestyle{empty}
+  
+  \newpage
+  
+  
+  
+  \vspace*{\fill}
+  
+  \noindent
+  \emph{
+    К формулировкам и доказательствам (если такие вообще приводятся) стоит относиться критически.
+    Основное в этом конспекте~---~решение задач (но ``критичность'' и здесь лучше не отключать).
+    За строгой, ясной и последовательной теорией лучше обращаться к ``нормальным'' источникам.
+    (Например, к лекциям.)
+  }
+  
+  \vspace*{\fill}
+  
+  \thispagestyle{empty}
+  
+  \newpage
+  
+  
+  \pagenumbering{arabic}
+
+
+  \section{Равномерная непрерывность}
+  
+  %\begin{figure}[ht]
+    %\centering
+    %\includegraphics[width=0.6\linewidth]{images/Apples}
+    %
+    %\caption{
+      %Одно яблоко, два яблока, ...~---~натуральные числа используются при счёте предметов.
+    %}
+    %\label{fig:naturals}
+  %\end{figure}
+  
+  
+  % TODO:
+  % [ ] Определение
+  % [ ] Примеры (x, x^2, sin x)
+  % [ ] Непрервность на отрезке -> равномерная непрерывность
+  % [ ] (?) Модуль непрерывности
+  
+  
+  \subsection{С1, \S 12, \textnumero 17}
+  \label{p:1-12-17}
+  
+  Пусть функция~$f$ равномерно непрерывна на отрезках~$[a, b]$ и~$[b, c]$.
+  Доказать, что в таком случае она будет равномерно непрерывна и на отрезке~$[a, c]$.
+  
+  \begin{solution}
+    % TODO: pic
+    Надо доказать, что  % TODO: ref
+    \[
+      \forall \eps > 0\ \exists \delta > 0\colon \forall x, x'\colon |x - x'| < \delta \to |f(x) - f(x')| < \eps
+    \]
+
+    Если $x,\ x'$ оба лежат либо на $[a, b]$, либо на $[b, c]$, то всё работает (на каждом из отрезков существует подходящий~$\delta$~---~пусть это $\delta_l$ и $\delta_r$ соответственно).
+
+    Рассмотрим случай, когда, например, $x \hm\in [a, b]$, а $x' \hm\in [b, c]$.
+    Считаем, что $|x \hm- x'| \hm< \delta$ (разность можно выбрать такой маленькой, как хотим).
+    Посмотрим на разность значений функции в этих точках:
+    \[
+      |f(x) - f(x')| = \Bigl|\bigl(f(x) - f(b)\bigr) + \bigl(f(b) - f(x')\bigr)\Bigr|
+        \leq |f(x) - f(b)| + |f(b) - f(x')| < 2 \eps
+    \]
+    где в последнем неравенстве считали, что $\delta \hm< \min{(\delta_l, \delta_r)}$, где $\delta_l \hm= \delta_l(\eps)$ и $\delta_r \hm= \delta_r(\eps)$.
+
+    Итого, при $\delta \hm< \min{\bigl(\delta_l(\eps/2), \delta_r(\eps/2)\bigr)}$ получаем ограниченность разности значений функций $|f(x) \hm- f(x')| \hm< \eps$ для всех пар~$x,\ x'$, таких что $|x \hm- x'| \hm< \delta$.
+  \end{solution}
+  
+  
+  
+  \subsection{С1, \S 12, \textnumero 23}
+  
+  Функция~$f$ непрерывна на~$[a, +\infty)$ и существует конечный $\lim\limits_{x \to +\infty} f(x)$.
+  Доказать, что~$f$ равномерно непрерывна на~$[a, +\infty)$.
+  
+  \begin{solution}
+    \emph{Идея}.
+    Существует конечный предел на бесконечности~---~значит, по мере увеличения~$x$ значения~$f(x)$ становятся всё ближе к этому предельному значению, а потому и ближе друг к другу.  % TODO: pic
+    Всегда можно подобрать такую окрестность бесконечности, чтобы разность $\bigl|f(x) \hm- f(x')\bigr|$ для точек~$x,\ x'$ из этой окрестности была сколь угодно маленькой...
+    А на оставшемся отрезке функция будет непрерывна, а потому и равномерно непрерывна.
+
+    Итак, раз существует конечный предел~$f(x)$ на бесконечности (равный для определённости~$A$), значит:
+    \[
+      \forall \eps > 0\ \exists \delta_r > 0\colon \forall x > b \equiv \frac{1}{\delta_r} \to \bigl|f(x) - A\bigr| \hm< \eps
+    \]
+
+    На отрезке же~$[a, b]$ функция~$f$ непрерывна.
+    Поэтому на нём она будет и равномерно непрерывна.  % TODO: ref
+    То есть найдётся $\delta_l$, такой что разность $\Delta f$ для любой пары точек отрезка, находящихся друг от друга на расстоянии менее~$\delta_l$, будет по модулю меньше~$\eps$.
+
+    Аналогично задаче~(\ref{p:1-12-17}), можно рассмотреть случай, когда одна из точек~$x,\ x'$ находится на~$[a, b]$, а другая на~$[b, +\infty)$.
+    При расстоянии между ними $\delta \hm= \min(\delta_l, \delta_r)$ разность $\Delta f$ для этих точек будет по модулю ограничена~$2 \eps$.
+
+    Итого, при $\delta \hm= \min\bigl(\delta_l(\eps/2), \delta_r(\eps/2)\bigr)$ разность $\Delta f$ для любой пары точек~$x,\ x' \hm\in [a, +\infty)$, таких что $|x \hm- x'| \hm< \delta$, будет ограничена по модулю величиной~$\eps$.
+  \end{solution}
+
+
+
+  % \subsection{С1, \S 12, \textnumero 25}
+  
+  % Доказать, что для равномерной непрерывности функции~$f$ на ограниченном интервале~$(a, b)$ необходимо и достаточно, чтобы функция была непрерывна на~$(a, b)$ и чтобы существовали конечные пределы $\lim\limits_{x \to a + 0} f(x)$ и $\lim\limits_{x \to b - 0} f(x)$.
+  % % TODO: про "конечные" в условии не было
+  
+  % \begin{solution}
+  
+  % \end{solution}
+  
+  
+  
+  \subsection{С1, \S 12, Т1(а)}
+  
+  Пусть функция~$f$ дифференцируема на~$[a, +\infty)$ и её производная~$f'$ ограничена.
+  Доказать, что~$f$ равномерно непрерывна на~$[a, +\infty)$.
+  
+  \begin{solution}
+    \emph{Идея}.
+    Если производная в любой точке~$x$ ограничена, то разность $f(x') \hm- f(x)$ будет стремиться к нулю при стремлении $x'$ к~$x$:
+    \[
+      f'(x) = \lim_{x' \to x} \frac{f(x') - f(x)}{x' - x} < C
+    \]
+  \end{solution}
+  
+  
+  
+  \subsection{С1, \S 12, Т2(а, б)}
+  
+  Исследовать функции на равномерную непрерывность на луче~$(0, +\infty)$:
+  \[
+    \mbox{а})\ f(x) = x^3 \sin{\frac{1}{x}},\quad \mbox{б})\ f(x) = x e^{\sin x}
+  \]
+  
+  \begin{solution}
+  
+  \end{solution}
+  
+
+\end{document}
