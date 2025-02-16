@@ -607,12 +607,12 @@
     \int x^{\alpha} \diff x = \frac{x^{\alpha + 1}}{\alpha + 1} + C,\quad \alpha \not= -1
   \]
   \[
-    \int \frac{1}{x} \diff x = \ln x + C
+    \int \frac{1}{x} \diff x = \ln |x| + C
   \]
 
   Интегралы от тригонометрических функций:
   \[
-    \int \sin x \diff x = -\cos x + C
+    \int \sin x \diff x = {-}\cos x + C  % TODO: excess space?
   \]
   \[
     \int \cos x \diff x = \sin x + C
@@ -649,7 +649,8 @@
       = \arcsin\left(\frac{x}{a}\right) + C,\quad (a > 0)
   \end{split}
   \end{equation}
-
+  
+  Интеграл, сводящийся к арктангенсу:
   \[
     \int \frac{1}{1 + x^2} \diff x = \arctg x + C
   \]
