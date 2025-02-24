@@ -1,0 +1,909 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{mystyle}
+
+\usepackage{gensymb}
+\usepackage{scalerel}
+\usepackage{stackengine}
+
+% \usepackage{skull}  % skull
+\usepackage{halloweenmath}  % \bigpumpkin, skull (https://tug.ctan.org/info/symbols/comprehensive/symbols-a4.pdf -- Table 76)
+
+\usepackage{tikzsymbols}
+
+% https://tex.stackexchange.com/questions/3266/how-do-i-use-a-circle-as-a-math-accent-larger-than-mathring
+% https://tex.stackexchange.com/a/3270/135045
+\usepackage{accents}
+
+\renewcommand{\mathring}[1]{\accentset{\circ}{#1}}
+
+
+\graphicspath{ {images/} }
+
+
+% https://tex.stackexchange.com/questions/5461/is-it-possible-to-change-the-size-of-an-arrowhead-in-tikz-pgf
+\usetikzlibrary{arrows.meta}
+
+
+\DeclareMathOperator{\Image}{Im}
+
+\definecolor{pink}{RGB}{218, 3, 174}
+\definecolor{violet}{RGB}{148, 0, 211}
+\definecolor{green}{RGB}{0, 153, 0}
+\definecolor{orange}{RGB}{255, 153, 0}
+\definecolor{blue}{RGB}{5, 73, 255}
+\definecolor{cyan}{RGB}{31, 206, 203}
+\definecolor{cyan2}{RGB}{0, 166, 147}
+\definecolor{cyangreen}{RGB}{0, 155, 118}
+\definecolor{cyangreen2}{RGB}{0, 109, 91}
+
+
+% https://tex.stackexchange.com/a/101138/135045
+
+\newcommand\widesim[1]{\ThisStyle{%
+  \setbox0=\hbox{$\SavedStyle#1$}%
+  \stackengine{-.1\LMpt}{$\SavedStyle#1$}{%
+    \stretchto{\scaleto{\SavedStyle\mkern.2mu\sim}{.5150\wd0}}{.6\ht0}%
+  }{O}{c}{F}{T}{S}%
+}}
+
+
+\newcommand{\BigMiddleThree}{\;\left|\vphantom{\begin{pmatrix} 0\\0\\0 \end{pmatrix}}\right.\;}
+\newcommand{\BigMiddleFour}{\;\left|\vphantom{\begin{pmatrix} 0\\0\\0\\0 \end{pmatrix}}\right.\;}
+
+
+% https://tex.stackexchange.com/questions/63531/how-to-write-quotation-marks-in-math-environment
+\DeclareMathSymbol{\mlq}{\mathord}{operators}{``}
+\DeclareMathSymbol{\mrq}{\mathord}{operators}{`'}
+
+% TODO: didn't work...
+% \renewcommand{\Re}{\mathop{\mathrm{Re}}\nolimits}
+% \renewcommand{\Im}{\mathop{\mathrm{Im}}\nolimits}
+
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+
+
+% https://tex.stackexchange.com/questions/544453/undefined-control-sequence-after-paragraph
+\renewcommand{\paragraph}[1]{\noindent\textbf{#1}\quad}
+
+
+% https://tex.stackexchange.com/questions/36851/skipping-line-after-proof-in-proof-environment#comment73553_36851
+\newcommand{\proofindent}{\hspace*{\fill}\par\vspace{0.5em}\noindent}
+
+
+% https://tex.stackexchange.com/questions/4813/extendible-equals-sign
+\makeatletter
+\newcommand*{\Relbarfill@}{\arrowfill@\Relbar\Relbar\Relbar}
+\newcommand*{\xeq}[2][]{\ext@arrow 0055\Relbarfill@{#1}{#2}}
+\makeatother
+
+
+% https://tex.stackexchange.com/questions/279100/typeset-the-shrug-%C2%AF-%E3%83%84-%C2%AF-emoji
+\newcommand{\shrug}[1][]{%
+\begin{tikzpicture}[baseline,x=0.8\ht\strutbox,y=0.8\ht\strutbox,line width=0.125ex,#1]
+  \def\arm{(-2.5,0.95) to (-2,0.95) (-1.9,1) to (-1.5,0) (-1.35,0) to (-0.8,0)};
+  \draw \arm;
+  \draw[xscale=-1] \arm;
+  \def\headpart{(0.6,0) arc[start angle=-40, end angle=40,x radius=0.6,y radius=0.8]};
+  \draw \headpart;
+  \draw[xscale=-1] \headpart;
+  \def\eye{(-0.075,0.15) .. controls (0.02,0) .. (0.075,-0.15)};
+  \draw[shift={(-0.3,0.8)}] \eye;
+  \draw[shift={(0,0.85)}] \eye;
+  % draw mouth
+  \draw (-0.1,0.2) to [out=15,in=-100] (0.4,0.95); 
+\end{tikzpicture}}
+
+
+
+% https://tex.stackexchange.com/a/314638/135045
+% \newcommand{\diff}{\mathop{}\!d\!}
+\newcommand{\diff}{\mathop{}\!d}
+
+
+% https://tex.stackexchange.com/questions/387570/how-to-make-cdot-operator-same-width-as-division-slash-operator-and-vice-ve
+\newcommand*{\slashdiv}{\makebox[\widthof{${}\cdot{}$}]{{}/{}}}
+
+
+% https://tex.stackexchange.com/questions/9641/filled-diamondsuit-and-heartsuit
+% https://tex.stackexchange.com/a/9643/135045
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheartsuit}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+% https://tex.stackexchange.com/questions/234942/whats-the-best-way-to-make-a-heart-butt-in-latex
+\newcommand{\heart}{\ensuremath\varheartsuit}
+
+
+\author{Алексеев Василий}
+
+
+\title{Семинар 2}
+\date{14 февраля ($\heart$) 2025}
+
+
+\begin{document}
+  \maketitle
+  
+  \tableofcontents
+
+  \thispagestyle{empty}
+  
+  \newpage
+  
+  
+  
+  \vspace*{\fill}
+  
+  \noindent
+  \emph{
+    К формулировкам и доказательствам (если такие вообще приводятся) стоит относиться критически.
+    Основное в этом конспекте~---~решение задач (но ``критичность'' и здесь лучше не отключать).
+    За строгой, ясной и последовательной теорией лучше обращаться к ``нормальным'' источникам.
+    (Например, к лекциям.)
+  }
+  
+  \vspace*{\fill}
+  
+  \thispagestyle{empty}
+  
+  \newpage
+  
+  
+  \pagenumbering{arabic}
+
+  \section{Неопределённый интеграл (продолжение)}
+
+  \subsection{Интегралы от рациональных функций (возвращение)}
+
+  Рассмотрим пример интеграла от \emph{неправильной} ``многочленной'' дроби.
+  
+  \subsubsection{С2, \S 2, \textnumero 2(7)}
+
+  Найти интеграл:
+  \begin{equation}\label{eq:2-2(7)-int}
+    J = \int \frac{x^5 + x^4 - 8}{x^3 - 4x} \diff x
+  \end{equation}
+  
+  \begin{solution}
+    Перед тем как начать искать этот интеграл по ``алгоритму'' (разложить на множители знаменатель, расписать дробь как сумму дробей, найти коэффициенты, перейти от интеграла суммы к сумме интегралов), надо сначала выделить ``целую часть'', оставив в числителе ``остаток'' от деления (многочлен меньшей степени, чем знаменатель):
+    \[
+      x^5 + x^4 - 8 = q(x) \cdot (x^3 - 4x) + r(x),\quad \deg r(x) < \deg(x^3 - 4x) = 3
+    \]
+    \[
+      \Rightarrow J = \int q(x) \diff x + \int \frac{r(x)}{x^3 - 4x} \diff x = \ldots
+    \]
+
+    Как выделить целую часть из ``многочленной'' дроби?
+    Идея такая же, как с обычными числовыми дробями~---~поделим числитель на знаменатель.
+    Будем делить в столбик, на каждой шаге подбирая слагаемое в частном так, чтобы в результате ``уничтожить'' текущий член с $x$ в максимальной степени в делимом.
+    \begin{table}[ht]
+        \centering
+        
+        \caption{Деление многочлена $x^5 \hm+ x^4 \hm- 8$ на $x^3 \hm- 4x$ ``в столбик'' (по техническим причинам нарисовано в виде таблицы).}
+        \label{tab:my_label}
+        
+        \begin{tabular}{l|l|l|l}
+             \toprule
+             Делимое           & Делитель   & Частное & Остаток\\
+             \midrule
+             $x^5 + x^4 - 8$   & $x^3 - 4x$ & $x^2$   & $x^4 + 4x^3 - 8$\\
+             $x^4 + 4x^3 - 8$  & $x^3 - 4x$ & $x$     & $4x^3 + 4x^2 - 8$\\
+             $4x^3 + 4x^2 - 8$ & $x^3 - 4x$ & $4$     & $4x^2 + 16x - 8$\\
+             \bottomrule
+        \end{tabular}
+    \end{table}
+
+    Итого:
+    \[
+      x^5 + x^4 - 8 = (x^2 + x + 4) + \frac{4x^2 + 16x - 8}{x^3 - 4x}
+    \]
+
+    И далее задача уже сводится к поиску интеграла от правильной дроби:
+    \[
+      J = \int (x^2 + x + 4) \diff x + 4 \int \frac{x^2 + 4x - 2}{x(x - 2)(x + 2)}
+    \]
+
+    Не будем доводить номер до конца~---~оставим эту возможность интересующемуся читателю при желании в качестве упражнения.
+    (А неинтересующемуся в любом случае не важно $\mathwitch*$).
+  \end{solution}
+
+
+  \subsection{Интегралы от иррациональных функций (продолжение)}
+
+  Познакомимся с ещё одним приёмом взятия интегралов от иррациональных функций.
+  Это~---~замены на $\cos t$, $\sin t$, $\ch t$, $\sh t$ или ещё на некоторые тригонометрические/гиперболические функции\footnote{  % TODO: hyphen after / in тригонометрические/гиперболические
+    Подробнее см. теорсправку в С2, пар. 3.
+  } с тем, чтобы благодаря тригонометрическим/гиперболическим тождествам с квадратами иррациональность исчезла.
+
+  \subsubsection{Пример}
+  
+  \begin{example}
+    Найдём интеграл:
+    \begin{equation}\label{eq:sqrt-example-int}
+      J = \int \sqrt{x^2 - 1} \diff x
+    \end{equation}
+
+    На выражение под корнем можно смотреть как на разность квадратов $x$ и единицы.
+    В каком случае разность квадратов может давать квадрат?
+
+    \medskip
+
+    \noindent
+    \emph{Способ 1 (замена на тригонометрическое)}.
+    Область определения функции под интегралом: $|x| \hm\geq 1$.
+    
+    Положим $x \hm\equiv \frac{1}{\cos t}$.
+    Для взаимной однозначности замены будем считать $t \hm\in [0, \pi]$.
+    Учитывая, что должно также выполняться $\cos t \hm{\not=} 0$, получаем $t \in [0, \pi/2) \hm\cup (\pi/2, 1]$.
+    Видно, что $t$, приводящие к положительным~$x$, ``отделены'' от~$t$, проводящих к отрицательным.
+    (Область допустимых значений~$t$ как бы ``разрезана'' посередине.)
+    Чтобы подстраховаться от каких-либо возможных осложнений в этой связи в будущем, рассмотрим для простоты $x \hm> 0$ и соответствующие им $t \hm\in [0, \pi/2)$.
+    % TODO: сослаться на какой-нибудь нормальный источник
+    (В идеале после этого надо бы было рассмотреть отдельно случай и отрицательных~$x$, но можно убедиться, что получится то же самое~---~появляющиеся в разных местах ``минусы'' друг друга в итоге скомпенсируют.)
+    
+    Итого, при такой замене получим:
+    \[
+      x^2 - 1 = \frac{1}{\cos^2 t} - 1 = \frac{\sin^2 t}{\cos^2 t} = \tg^2 t
+    \]
+    Таким образом, иррациональность уйдёт!
+    Для проведения замены в интеграле найдём также выражение $\diff x$ через~$t$:
+    \[
+      \diff x = \diff\left(\frac{1}{\cos t}\right) = -\frac{1}{\cos^2 t} \cdot (-\sin t) \diff t
+    \]
+
+    В итоге в результате замены получаем такой интеграл:\footnote{
+      Так как $t \hm\in [0, \pi/2)$, то $\sqrt{\tg^2 t} = \tg t$ без модуля.
+    }
+    \[
+      J = \int \tg t \cdot \frac{\sin t}{\cos^2 t} \diff t = \blacktriangle
+    \]
+
+    Корня больше нет, зато теперь под интегралом тригонометрические функции...
+    Можно попробовать расписать тангенс:
+    \[
+      \blacktriangle = \int \frac{\sin t}{\cos t} \frac{\sin t}{\cos^2 t} \diff t = \int \frac{\sin^2 t}{\cos^3 t} \diff t = \diamondsuit
+    \]
+
+    Теперь $\sin^2 t$ можно выразить через $\cos^2 t$~---~в результате под интегралом получится функция от $\cos t$.
+    Если бы можно было сделать замену, то получился бы интеграл от рациональной функции...
+    (Пока же замену сделать нельзя, потому что ещё остаётся $\diff x$.)
+    Однако можно попробовать ещё один ``приём'', который иногда помогает с интегралами от тригонометрических~---~домножим и поделим, например, на $\cos t$:
+    \[
+      \diamondsuit = \int \frac{\sin^2 t}{\cos^3 t} \frac{\cos t \diff t}{\cos t}
+        = \int \frac{\sin^2 t}{\cos^4 t} \diff \sin t = \spadesuit
+    \]
+
+    Что получилось?
+    В числителе $\sin^2 t$, в знаменателе $\cos^4 t$ (выражающийся через $\sin^2 t$), и всё это по $\diff \sin t$!
+    Таким образом, получается замена $u \hm\equiv \sin t$ (очевидно, $|u| \hm\leq 1$, но также и $u \hm> 0$~---~при рассматриваемом $t$) приводит к интегралу от рациональной дроби.
+    Находим его и возвращаемся обратно к~$x$:\footnote{
+      В одном из последних переходов используется введённое в самом начале ограничение на знак $x$: $\sqrt{x^2} \hm= x$ без модуля.
+    }
+    \begin{equation*}
+    \begin{split}
+      \spadesuit &= \int \frac{u^2}{(1 - u^2)^2} \diff u\\
+        &= \ldots\\
+        &= \frac{u}{2(1 - u^2)} + \frac{1}{4} \ln\left|1 - u\right| - \frac{1}{4} \ln\left|1 + u\right| + C\\
+        &=  \frac{\sin t}{2(1 - \sin^2 t)} + \frac{1}{4} \ln\left(\frac{1 - \sin t}{1 + \sin t}\right) + C\\
+        &= \frac{\sqrt{1 - \cos^2 t}}{2 \cos^2 t} + \frac{1}{4} \ln\left(\frac{1 - \sqrt{1 - \cos^2 t}}{1 + \sqrt{1 - \cos^2 t}}\right) + C\\
+        &= \frac{x \sqrt{x^2 - 1}}{2} + \frac{1}{4} \ln\left(\frac{x - \sqrt{x^2 - 1}}{x + \sqrt{x^2 - 1}}\right) + C
+    \end{split}
+    \end{equation*}
+
+    Но рассмотренная замена~---~не единственный возможные способ решения (и не единственная возможная ``решающая интеграл'' замена).
+
+    \medskip
+
+    \noindent
+    \emph{Способ 2 (замена на гиперболическое)}.
+
+    Вспомним гиперболические синус и косинус:
+    \begin{equation}\label{eq:sh-and-ch}
+      \begin{aligned}
+        &\sh x = \frac{e^x - e^{-x}}{2}\\
+        &\ch x = \frac{e^x + e^{-x}}{2}
+      \end{aligned}
+    \end{equation}
+
+    И ``основное'' тождество с ними:\footnote{
+      Проверяется просто подстановкой из формул~\eqref{eq:sh-and-ch}.
+    }
+    \[
+      \ch^2 x - \sh^2 x = 1
+    \]
+
+    Вспоминая про интеграл~\eqref{eq:sqrt-example-int}, можем увидеть такой вариант избавляющей от корня замены:\footnote{
+      При такой замене неявно налагается также ограничение и на $x$: раз $x \hm= \ch t$, то $x \hm\geq 1$.
+      В идеале стоило бы потом рассмотреть ещё замену $x \hm= -\ch t$, чтобы учесть $x \hm\leq -1$.
+      Однако, как и в прошлый раз, несложно будет убедиться в том, что в конечном результате ничего не поменяется.
+    }
+    \[
+      \begin{aligned}
+        &x \equiv \ch t,\quad t > 0\ \mbox{(для определённости)}\\
+        &\diff x = \sh t \diff t
+      \end{aligned}
+    \]
+
+    В результате приходим к интегралу:\footnote{
+      При $t \hm> 0$ будет $\sqrt{\sh^2 t} \hm= \sh t$ без модуля.
+    }
+    \[
+      J = \int \sh t \cdot \sh t \diff t = \int \sh^2 t \diff t
+    \]
+
+    Этот интеграл можно (как и аналогичные тригонометрические) взять с помощью понижения степени:
+    \[
+      \left.
+        \begin{aligned}
+          &\sh^2 t = \frac{e^{2t} + e^{-2t} - 2}{4}\\
+          &\ch^2 t = \frac{e^{2t} + e^{-2t} + 2}{4}\\
+          &\ch 2t = \frac{e^{2t} + e^{-2t}}{2}
+        \end{aligned}
+      \right|
+      \Rightarrow \begin{aligned}
+        &\vphantom{\frac{\ch 2t - 1}{2}}\\
+        &\ch 2t = \ch^2 t + \sh^2 t\\
+        &\sh^2t = \frac{\ch 2t - 1}{2}
+      \end{aligned}
+      % \Rightarrow \sh^2t = \frac{\ch 2t - 1}{2}
+    \]
+
+    Таким образом,
+    \begin{equation*}
+    \begin{split}
+      J &= \int \frac{\ch 2t - 1}{2} \diff t\\
+        &= \frac{1}{2} \left(\int \ch 2t \diff t - \int \diff t\right)\\
+        &= \frac{1}{2} \left(\frac{1}{2} \sh 2t - t\right) + C = \blacktriangle
+    \end{split}
+    \end{equation*}
+
+    Чтобы вернуться обратно к $x$, выразим
+    \[
+      \sh 2t = 2 \sh t \ch t = 2 \sqrt{\ch^2 t - 1} \ch t = 2 \sqrt{x^2 - 1} \cdot x
+    \]
+
+    Также надо выразить $t$ через $x$...\footnote{
+      Далее делаем по аналогии с нахождением ``длинного логарифма'' из прошлого конспекта.
+    }
+    \[
+      \begin{aligned}
+        &x = \ch t,\quad t > 0\\
+        &x = \frac{1}{2}\left(e^t + e^{-t}\right)  % = \frac{1}{2}\left(z + \frac{1}{z}\right),\quad z \equiv e^t > 1
+      \end{aligned}
+    \]
+    %\[
+      %\begin{aligned}
+        %&z^2 -2x \cdot z + 1 = 0\\
+        %&z_{1, 2} = x \pm \sqrt{x^2 - 1}  % \frac{x \pm \sqrt{x^2 - 1}}{1}
+      %\end{aligned}
+    %\]
+    
+    Если ввести ещё одну замену $z \hm\equiv e^t \hm> 1$, то можно прийти к квадратному уравнению относительно~$z$:
+    \[
+      \begin{aligned}
+        &x = \frac{1}{2}\left(z + \frac{1}{z}\right)\\
+        &z^2 -2x \cdot z + 1 = 0 \Rightarrow z_{1, 2} = x \pm \sqrt{x^2 - 1}
+      \end{aligned}
+    \]
+
+    Раз положили $t \hm> 0$, то, очевидно, нужен больший из двух~$z$, поэтому в итоге:
+    \[
+      \begin{aligned}
+        &z = x + \sqrt{x^2 - 1}\\
+        &t = \ln z = \ln \left(x + \sqrt{x^2 - 1}\right)
+      \end{aligned}
+    \]
+
+    Наконец досчитываем интеграл (вспоминая также о том, что $x$ может быть и отрицательный):
+    \[
+      \blacktriangle = \frac{x \sqrt{x^2 - 1}}{2} - \frac{1}{2} \ln \left|x + \sqrt{x^2 - 1}\right| + C
+    \]
+
+    (На первый взгляд, ответ отличается от полученного прошлым способом, но это не так.)
+
+    \medskip
+
+    \noindent
+    \emph{Способ 3 (замена дроби): Эскиз}.
+
+    На примере этого интеграла можно вспомнить и ещё один вариант замены в интегралах с корнями:\footnote{
+      Чтобы что-то сделать с образовавшимся модулем, можно бы было при желании попробовать следующее: просто убрать модуль под интегралом, считая как бы $x \hm+ 1 \hm> 0$.
+      И потом в полученной формуле для первообразной заменить все скобки $(x \hm+ 1)$ на $\sqrt{(x + 1)^2}$.
+      Также стоило бы проследить, чтобы в первообразной $(x \hm+ 1)$ не осталась ни в каком знаменателе (ведь в исходной подынтегральной функции точка $x \hm= -1$ допускается.)
+    }
+    \[
+      J = \int \sqrt{(x - 1)(x + 1)} \diff x = \int |x + 1| \sqrt{\frac{x - 1}{x + 1}} \diff x
+    \]
+
+    \medskip
+
+    \noindent
+    \emph{Способ 4 (по старинке~---~по частям)}.
+
+    Можно попробовать интегрировать без каких-то замен, а просто по частям:
+    \[
+      \int u \diff v = uv - \int v \diff u
+    \]
+
+    В данном случае: $u \hm= \sqrt{x^2 - 1}$ и $v \hm= x$:
+    \begin{equation}
+    \begin{split}
+      J &= \int \sqrt{x^2 - 1} \diff x\\
+        &= x \sqrt{x^2 - 1} - \int x \cdot \diff \sqrt{x^2 - 1}\\
+        &= x\sqrt{x^2 - 1} - \int \frac{x^2}{\sqrt{x^2 - 1}} \diff x\\
+        &= x\sqrt{x^2 - 1} - \int \frac{x^2 - 1}{\sqrt{x^2 - 1}} \diff x - \int \frac{1}{\sqrt{x^2 - 1}} \diff x\\
+        &= x\sqrt{x^2 - 1} - J - \ln|x + \sqrt{x^2 - 1}|
+    \end{split}
+    \end{equation}
+    Видно, что в последнем переходе получается точно такой же интеграл, как в начале.
+    В результате получается как бы уравнение относительно~$J$.
+    (Правда, это всё же не совсем уравнение~---~ведь $J$ это \emph{совокупность} первообразных):
+    \[
+      J = x\sqrt{x^2 - 1} - J - \ln\left|x + \sqrt{x^2 - 1}\right|
+    \]
+
+    Пожалуй, точнее было бы записать так:
+    \[
+      F(x) + P = x\sqrt{x^2 - 1} - (F(x) + Q) - \ln\left|x + \sqrt{x^2 - 1}\right|
+    \]
+    где $F(x)$~---~первообразная, а $P, Q \hm\in \RR$.
+
+    В итоге получаем:
+    \[
+      F(x) = \frac{x\sqrt{x^2 - 1}}{2} - \frac{1}{2}\ln\left|x + \sqrt{x^2 - 1}\right| + C
+    \]
+
+    Так выглядит произвольная первообразная подынтегральной функции.
+    Очевидно, так же можно записать и неопределённый интеграл.
+  \end{example}
+
+  % \begin{example}
+  %   Найдём интеграл:
+  %   \[
+  %     \int x \sqrt{x^2 - 1} \diff x
+  %   \]
+  % \end{example}
+
+  \subsubsection{С2, \S 3, \textnumero 18(3)}
+
+  Найти интеграл:
+  \[
+    J = \int \frac{
+      \sqrt[3]{1 + \sqrt[4]{x}}
+    }{
+      \sqrt{x}
+    } \diff x
+  \]
+  
+  \begin{solution}
+    В функции под интегралом есть несколько корней.
+    Причём $\sqrt x \hm= \left(\sqrt[4]{x}\right)^2$.
+    Какую замену можно провести, чтобы уйти от корней? (хотя бы от некоторых)
+    \[
+      \begin{aligned}
+        &\sqrt[4]{x} \equiv t \geq 0\\
+        &x = t^4\\
+        &\diff x = 4t^3 \diff t
+      \end{aligned}
+    \]
+
+    Интеграл при этом:
+    \[
+      J = \int \frac{\sqrt[3]{1 + t}}{t^2} \cdot 4t^3 \diff t = 4 \int t \sqrt[3]{1 + t} \diff t
+    \]
+
+    Что теперь?
+    Можно сделать ещё одну замену:
+    \[
+      \begin{aligned}
+        &1 + t \equiv u^3,\quad u \in \RR\\
+        &\diff t = 3u^2 \diff u
+      \end{aligned}
+    \]
+
+    Интеграл в результате замены:
+    \[
+      J = 4 \int (u^3 - 1) u \cdot 3u^2 \diff u = \frac{12}{7} u^7 - 3u^4 + C = \blacktriangle
+    \]
+
+    И обратные замены:
+    \begin{equation*}
+    \begin{split}
+      \blacktriangle &= \frac{12}{7} (1 + t)^{7/3} - 3(1 + t)^{4/3} + C\\
+        &= \frac{12}{7} (1 + t)^{7/3} - 3(1 + t)^{4/3} + C\\
+        &= \frac{12}{7} \left(1 + \sqrt[4]{x}\right)^{7/3} - 3 \left(1 + \sqrt[4]{x}\right)^{4/3} + C
+    \end{split}
+    \end{equation*}
+  \end{solution}
+
+
+  \subsection{Интегралы от трансцендентных (не алгебраических) функций}
+
+  Интегралы от чего-то кроме рациональных дробей и корней (тригонометрические, гиперболические функции, показательная, логарифм).
+
+  \subsubsection{С2, \S 4, \textnumero 3(1)}
+
+  Найти интеграл:
+  \begin{equation}
+    J = \int \frac{\sin 2x}{\cos^3 x} \diff x
+  \end{equation}
+  
+  \begin{solution}
+    Решение из серии ``не знаешь, что делать~---~делай, что можешь'': распишем синус двойного угла и посмотрим, что получится:
+    \[
+      J = \int \frac{2 \sin x \cos x}{\cos^3 x} \diff x = 2 \int \frac{\sin x}{\cos^2 x} \diff x
+    \]
+
+    Теперь можно, воспользовавшись основным тригонометрических тождеством, выразить $\cos^2 x$ через синус...
+    Можно, но это ни к чему не приведёт: в функции под интегралом будет только синус, но замены ($\sin x \hm\equiv t$) сделать не получится, потому что под дифференциалом-то стоит не синус.
+
+    Но можно занести синус под дифференциал:
+    \[
+      \sin x \diff x = \diff (-\cos x) = -\diff \cos x
+    \]
+
+    Это приведёт к тому, что в интеграле проявится естественная замена $\cos x \hm\equiv t$, которая сделает из него интеграл от рациональной функции:
+    \[
+      J = -2\int \frac{\diff \cos x}{\cos^2 x} \xrightarrow[]{\cos x \equiv t} -2\int \frac{\diff t}{t^2} = \frac{2}{t} + C = \frac{2}{\cos x} + C
+    \]
+  \end{solution}
+
+
+  \subsubsection{С2, \S 4, \textnumero 4(2)}
+
+  Найти интеграл:
+  \begin{equation}
+    J = \int \sin^3 x \cos^4 x \diff x
+  \end{equation}
+  
+  \begin{solution}
+    Этот интеграл можно взять таким же приёмом: ``откусыванием'' $\sin x$, занесением его под дифференциал (он при этом перейдёт в косинус) и заменой (под интегралом к этому моменту останется косинус и квадрат синуса, также выражающийся через косинус):
+    \[
+      J = \int \underbrace{\:\sin^2 x}_{1 - \cos^2 x} \cdot \cos^4 x \cdot \overbrace{\sin x \diff x}^{-\diff \cos x} \xrightarrow{\cos x \equiv t} = -\frac{t^5}{5} + \frac{t^7}{7} + C = \frac{\cos^7 x}{7} - \frac{\cos^5 x}{5} + C
+    \]
+
+    % TODO: fail...
+    % \medskip
+
+    % \noindent
+    % \emph{Другой способ (другая замена)}.
+
+    % Можно заметить, что если ``откусить'' один косинус (засунуть его под дифференциал), то то, что останется, можно будет свернуть в синус двойного угла.
+    % Далее можно будет попробовать взять интеграл по частям (никакой другой возможности в результате и не останется):
+    % \[
+    %   J = \int \underbrace{\:\sin^3 x \cos^3x}_{\frac{1}{2^3} \sin^3 2x} \cdot \overbrace{\cos x \diff x}^{\diff \sin x} = \frac{1}{8} \left(\sin^3 2x \cdot \sin x - \int \sin x \diff \sin^3 2x\right) = \spadesuit
+    % \]
+
+    % Посмотрим отдельно получившийся в результате ``по частям'' интеграл:
+    % \[
+    %   \int \sin x \diff \sin^3 2x = \int \sin x \cdot \overbrace{\left(3\sin^2 2x \cdot \cos 2x \cdot 2\right)}^{(\sin^3 2x)'} \diff x
+    % \]
+  \end{solution}
+
+
+  \subsubsection{``Лемма-номер''}\label{seq:lemma-cos}
+
+  Найти интеграл:
+  \begin{equation}
+    \int \frac{1}{\cos x} \diff x
+  \end{equation}
+  
+  \begin{solution}
+    Воспользуемся \emph{универсальной тригонометрической подстановкой}~---~это выражение $\sin x$ и $\cos x$ через тангенс половинного угла $\tg \frac{x}{2}$~---~с тем чтобы потом ввести замену на тангенс.
+    В результате этой замены интеграл с тригонометрическими функциями можно свести к интегралу от рациональной функции.
+    Правда, вычислений такое интегрирование может занимать не мало.
+    (Поэтому если есть ещё идеи, что делать с интегралом, то универсальную тригонометрическую лучше приберегать как запасной вариант, особенно если синус и косинус присутствуют в степенях больше единицы.)
+
+    Выведем формулы для проведения замены.
+    Для этого смотрим на $\sin x$ и $\cos x$ как на функции ``двойного половинного аргумента'', а потом ещё на единицу~---~как на сумму квадратов синуса и косинуса:
+    \begin{equation*}
+    \begin{split}
+      \sin x &= \sin{\left(2 \cdot \frac{x}{2}\right)}\\
+        &= 2 \sin \frac{x}{2} \cos \frac{x}{2}\\
+        &= \frac{2 \sin \frac{x}{2} \cos \frac{x}{2}}{\sin^2 \frac{x}{2} + \cos^2 \frac{x}{2}}
+        = \frac{2 \tg \frac{x}{2}}{\tg^2 \frac{x}{2} + 1}
+    \end{split}
+    \end{equation*}
+    \begin{equation*}
+    \begin{split}
+      \cos x &= \cos{\left(2 \cdot \frac{x}{2}\right)}\\
+        &= \cos^2 \frac{x}{2} - \sin^2 \frac{x}{2}\\
+        &= \frac{\cos^2 \frac{x}{2} - \sin^2 \frac{x}{2}}{\sin^2 \frac{x}{2} + \cos^2 \frac{x}{2}}
+        = \frac{1 - \tg^2 \frac{x}{2}}{\tg^2 \frac{x}{2} + 1}
+    \end{split}
+    \end{equation*}
+
+    Заменяя $\tg \frac{x}{2} \hm\equiv t$, $t \hm\in \RR$, получаем:
+    \begin{equation}
+      \begin{aligned}
+        &\sin x = \frac{2 t}{1 + t^2}\\
+        &\cos x = \frac{1 - t^2}{1 + t^2}
+      \end{aligned}
+    \end{equation}
+
+    Раз $t \hm= \tg \frac{x}{2}$, то $x \hm= 2 \arctg t$, поэтому для дифференциала $\diff x$ получаем такое выражение через~$t$:
+    \[
+      \diff x = \diff (2 \arctg t) = \frac{2}{1 + t^2} \diff t
+    \]
+
+    В итоге можем посмотреть на интеграл после замены:
+    \begin{equation*}
+    \begin{split}
+      J &= \int \frac{1}{\frac{1 - t^2}{1 + t^2}} \cdot \frac{2}{1 + t^2} \diff t\\
+        &= 2 \int \frac{1}{1 - t^2} \diff t\\
+        &= \int \left(\frac{1}{1 - t} + \frac{1}{1 + t}\right) \diff t\\
+        &= -\ln|1 - t| + \ln |1 + t| + C
+        = \ln \left|\frac{1 + t}{1 - t}\right| + C
+    \end{split}
+    \end{equation*}
+
+    Возвращаясь обратно к~$x$, получаем ответ:
+    \[
+      J = \ln \left|\frac{1 + \tg \frac{x}{2}}{1 - \tg \frac{x}{2}}\right| + C
+    \]
+
+    Рассмотрим интереса ради ещё один способ нахождения этого интеграла.
+
+    \medskip
+
+    \noindent
+    \emph{Ещё один \st{трюк} способ}.
+
+    Вспомним интеграл:
+    \[
+      J = \int \frac{1}{\cos x} \diff x
+    \]
+
+    Домножим и поделим дробь под интегралом на $\cos x$.
+    При этом ничего по сути не изменится.
+    Однако в результате появится возможность смотреть на $\cos x \diff x$ сверху как на дифференциал синуса $\diff \sin x$, а в знаменателе будет $\cos^2 x$~---~тоже выражающийся через синус как $1 \hm- \sin^2 x$.
+    А это ``напрашивающаяся'' замена синуса:
+    \begin{equation*}
+    \begin{split}
+      J &= \int \frac{1}{\cos x} \cdot \frac{\cos x}{\cos x} \cdot \diff x\\
+        &= \int \frac{1}{\cos^2 x} \cdot (\cos x\diff x)\\
+        &= \int \frac{1}{1 - \sin^2 x} \diff \sin x
+        % &= \int \frac{1}{1 - t^2} \diff t \quad\quad (\sin x \equiv t)\\
+        = \frac{1}{2} \ln\left|\frac{1 + \sin x}{1 - \sin x}\right| + C
+    \end{split}
+    \end{equation*}
+
+    (Ответ получился такой же, как в результате универсальной тригонометрической подстановки.)
+  \end{solution}
+  
+
+  \subsubsection{С2, \S 4, \textnumero 9(1)}
+
+  Найти интеграл:
+  \begin{equation}
+    \int \frac{1}{\cos^3 x} \diff x
+  \end{equation}
+  
+  \begin{solution}
+    Попробуем подойти к этому интегралу так же, как к предыдущему попроще~(\ref{seq:lemma-cos}).
+
+    \medskip
+
+    \noindent
+    \emph{Способ 1: ``Универсальный''}.
+
+    Применять универсальную тригонометрическую подстановку для этого номера, на первый взгляд, кажется, ``опасным'', потому $\tg \frac{x}{2}$ будет в квадрате, сам косинус при этом ещё в кубе, итого можно ожидать, что получится что-то в шестой степени.
+    Но, возможно, что-нибудь сократится при умножении на преобразованный $\diff x$, и получится не так безысходно:
+    \[
+      J = \int \frac{1}{\left(\frac{1 - t^2}{1 + t^2}\right)^{\!3}} \cdot \frac{2}{1 + t^2} \diff t = 2\int \frac{(1 + t^2)^2}{(1 - t^2)^3} \diff t
+    \]
+
+    Ничего удивительного не произошло~---~шестая степень не исчезла.
+    Если дальше пытаться искать разложение дроби под интегралом методом неопределённых коэффициентов, то этих коэффициентов будет шесть штук.
+    Система шесть на шесть...
+    Оставим желающим возможность довести это решение до конца, и перейдём к другому способу нахождения интеграла.
+
+    \medskip
+
+    \noindent
+    \emph{Способ 2: ``Домножить-поделить-ничего-не-изменить''}.
+
+    Домножим и поделим на косинус~---~снова косинус сверху можно будет занести под дифференциал, придя к синусу; а снизу степень косинуса дополнится до четвёртой~---~это можно будет представить как квадрат квадрата, а сам квадрат тоже можно будет выразить через синус.
+    Получается в явном виде замена синуса:
+    \begin{equation*}
+    \begin{split}
+      J &= \int \frac{1}{\textcolor{blue}{\cos^3 x}} \cdot \frac{\textcolor{pink}{\cos x}}{\textcolor{blue}{\cos x}} \cdot \textcolor{pink}{\diff x}\\
+        &= \int \frac{1}{(1 - \sin^2 x)^2} \diff \sin x \xrightarrow{\sin x \equiv t} \int \frac{1}{(1 - t^2)^2} \diff t
+    \end{split}
+    \end{equation*}
+
+    Кажется, что получившийся интеграл от рациональной приятнее, чем в способе с универсальной подстановкой: степень знаменателя четвёртая вместо шестой (надо будет искать меньше коэффициентов), сверху тоже всего лишь единица вместо многочлена с~$t$ (искать будет проще).
+    Этот интеграл уже вполне можно за разумное время довести до конца.
+    Однако снова делать этого не будем, а переключимся на ещё один возможный\footnote{
+      Замеченный автором конспекта.
+    } способ взятия интеграла.
+
+    \medskip
+
+    \noindent
+    \emph{Способ 3: ``Многоликая единица''}.
+
+    Снизу в интеграле стоит косинус в кубе.
+    Естественным было бы желание каким-то образом это упростить~---~понизить степень косинуса.
+    Сделать это через табличную формулу понижения степени для куба, кажется, не вариант, потому что косинус стоит в знаменателе (проще от такого понижения не станет, а вот если бы $\cos^3 x$ был в числителе...)
+
+    Но кое-какой выход есть.
+
+    На единицу, стоящую в знаменателе, можно смотреть таким образом:
+    \[
+      1 = \sin^2 x + \cos^2 x
+    \]
+    если так её расписать, то получим сумму квадратов сверху, куб снизу~---~возможно, что-то упростится:
+    \[
+      J = \int \frac{\sin^2 x + \cos^2 x}{\cos^3 x} \diff x = \int \frac{\sin^2 x}{\cos^3 x} \diff x + \int \frac{1}{\cos x} \diff x
+    \]
+
+    Второй интеграл уже находили: дли него вполне можно применить универсальную тригонометрическую замену~(\ref{seq:lemma-cos}).
+    С первым же интегралом можно воспользоваться приёмом ``домножить-поделить''~---~на косинус:
+    \[
+      \int \frac{\sin^2 x}{\cos^3 x} \diff x
+        = \int \frac{\sin^2 x}{\textcolor{blue}{\cos^3 x}} \cdot \frac{\textcolor{pink}{\cos x}}{\textcolor{blue}{\cos x}} \cdot \textcolor{pink}{\diff x}
+        = \int \frac{\sin^2 x}{(1 - \sin^2 x)^2} \diff \sin x
+    \]
+    % получится $\diff \sin x$, останется $\sin^3 x$ сверху, а снизу~---~будет $\cos^4 x$, который есть $(1 \hm- \sin^2 x)^2$.
+    в результате вырисовывается замена синуса.
+
+    Получилось примерно так же, как в предыдущем варианте решения, даже посложнее.
+    Но про возможность ``переодевать'' единицу при интегрировании синусов и косинусов стоит иметь в виду (очевидно, не самый универсальный приём, но иногда может быть полезно).
+
+    \medskip
+
+    Заметим в конце, что, будь степень косинуса в знаменателе не первой или третьей, а второй, то интегрировать можно было бы намного проще:
+    \[
+      \int \frac{1}{\cos^2 x} \diff x = \int \diff \tg x = \tg x + C
+    \]
+  \end{solution}
+
+
+
+  \subsubsection{С2, \S 4, \textnumero 15(2)}
+
+  Найти интеграл:
+  \begin{equation}\label{eq:int-15(2)}
+    J = \int \frac{\cos x - \sin x}{\cos x + \sin x} \diff x
+  \end{equation}
+  
+  \begin{solution}
+    \emph{Способ 1: ``Универсальный''}.
+    Хотя начинать с выражения всего через тангенс половинного угла~---~это \st{практически всегда} часто не самый оптимальный способ решения, но в данном случае начнём именно с него, потому что кажется, что ситуация подходящая (синусы и косинусы в первой степени; и в числителе, и в знаменателе~---~что-то может сократиться):
+    \[
+      J = \int \frac{\frac{1 - t^2}{1 + t^2} - \frac{2 t}{1 + t^2}}{\frac{1 - t^2}{1 + t^2} + \frac{2 t}{1 + t^2}} \cdot \frac{2}{1 + t^2} \diff t = 2\int \frac{-t^2 - 2t + 1}{(-t^2 + 2t + 1)(1 + t^2)} \diff t
+    \]
+
+    Ничего особо не сократилось.
+    В знаменателе четвёртая степень.
+    Решаемо, но... посмотрим другой способ.
+
+    \medskip
+
+    \noindent
+    \emph{Способ 2: ``Более подходящий тангенс''}.
+
+    Под интегралом есть и синус, и косинус.
+    Но несложно заметить, что если поделить числитель и знаменатель дроби на, скажем, косинус~---~то в функции под интергалом останется по сути один тангенс:
+    \[
+      J = \int \frac{\cos x - \sin x}{\cos x + \sin x} \diff x
+      = \int \frac{1 - \frac{\sin x}{\cos x}}{1 + \frac{\sin x}{\cos x}} \diff x
+      = \int \frac{1 - \tg x}{1 + \tg x} \diff x = \spadesuit
+    \]
+
+    Но заменить тангенс пока как будто нельзя, ведь остаётся ещё $\diff x$.
+    Попробуем его тоже ``причесать'':
+    \begin{equation*}
+    \begin{split}
+      \diff x &= \frac{\cos^2 x}{\cos^2 x} \diff x\\
+        &= \cos^2 x \cdot \left(\frac{1}{\cos^2 x} \diff x\right)\\
+        &= \frac{\cos^2 x}{1} \cdot \left(\tg' x \diff x\right)\\
+        &= \frac{\cos^2 x}{\sin^2 x + \cos^2 x} \cdot \diff \tg x
+        = \frac{1}{1 + \tg^2 x} \diff \tg x
+    \end{split}
+    \end{equation*}
+    где использовалось занесение под дифференциал производной тангенса\footnote{
+      Которую, конечно, надо было ещё заметить...
+    } и ``многоликость'' единицы.
+
+    Можем вернуться к интегралу:
+    \[
+      \spadesuit = \int \frac{1 - \tg x}{1 + \tg x} \cdot \frac{1}{1 + \tg^2 x} \diff \tg x
+    \]
+    который уже берётся заменой тангенса: $\tg x \hm\equiv t$, $t \hm\in \RR$.
+
+    \medskip
+
+    \noindent
+    \emph{Способ 3: ``Домножить-поделить 2''}.
+
+    Дробь под интегралом~\eqref{eq:int-15(2)} есть дробь вида $\frac{a + b}{a - b}$~---~отношение суммы (разности) двух чего-то к их разности (сумме).
+    Наверняка читатель уже сталкивался с таким ``трюком'', когда верх и низ дроби домножается на сумму или разность с тем, чтобы снизу получилась разность квадратов.
+    В общем, в интеграле этого номера можно попробовать сделать то же самое:
+    \[
+      J = \int \frac{(\cos x - \sin x)\textcolor{pink}{(\cos x - \sin x)}}{(\cos x + \sin x)\textcolor{pink}{(\cos x - \sin x)}} \diff x
+      = \int \frac{(\cos x - \sin x)^2}{\cos^2 x - \sin^2 x} \diff x = \blacktriangle
+    \]
+
+    Распишем квадрат разности сверху и попробуем ещё как-то попреобразовывать~---~имея в виду, что в знаменателе уже по сути стоит косинус двойного угла:
+    \begin{equation*}
+    \begin{split}
+      \blacktriangle &= \int \frac{\cos^2 x + \sin^2 x - 2\sin x \cos x}{\cos 2x} \diff x\\
+      &= \int \frac{1 - \sin 2x}{\cos 2x} \diff x
+      = \int \frac{1}{\cos 2x} \diff x - \int \frac{\textcolor{pink}{\sin 2x}}{\cos 2x} \textcolor{pink}{\diff x}
+      = \frac{1}{2} \int \frac{\diff (2x)}{\cos 2x} + \frac{1}{2} \int \frac{\diff \cos 2x}{\cos 2x}
+    \end{split}
+    \end{equation*}
+
+    С первым интегралом уже сталкивались ранее в конспекте~(\ref{seq:lemma-cos}), а второй по сути табличный (если мысленно заменить $\cos 2x$).
+
+    \medskip
+
+    \noindent
+    \emph{Способ 4: ``Заметим''}.\footnote{
+      Особенно легко такое решение угадывается по виду ответа.
+    }
+
+    Заметим, что числитель в дроби под интегралом~\eqref{eq:int-15(2)}~---~это производная знаменателя:
+    \[
+      (\cos x + \sin x)' = -\sin x + \cos x
+    \]
+
+    Таким образом, можно сделать моментально решающую интеграл замену:
+    \[
+      J = \int \frac{\textcolor{pink}{(\cos x + \sin x)'}}{\cos x + \sin x} \textcolor{pink}{\diff x}
+      = \int \frac{\diff (\cos x + \sin x)}{(\cos x + \sin x)}
+      = \ln |\cos x + \sin x| + C
+    \]
+  \end{solution}
+
+
+  \subsubsection{С2, \S 4, \textnumero 21(1)}
+
+  Найти интеграл:
+  \begin{equation}
+    \int \frac{\diff x}{1 + 4 \cos x}
+  \end{equation}
+  
+  \begin{solution}
+    \emph{Способ 1: ``Универсальный''}.
+    Вспомним ещё раз методику взятия подобных интегралов, основанную на универсальной тригонометрической подстановке.
+    Выражаем $\cos x$ и $\diff x$ через $\tg \frac{x}{2} \hm\equiv t$:
+    \[
+      \begin{aligned}
+        &\cos x = \cos^2\frac{x}{2} - \sin^2\frac{x}{2} = \frac{1 - t^2}{1 + t^2}\\
+        &\diff x = \diff (2\arctg t) = \frac{2 \diff t}{1 + t^2}
+      \end{aligned}
+    \]
+
+    Интеграл принимает вид:
+    \[
+      J = \int \frac{\frac{2}{1 + t^2}}{1 + 4\frac{1 - t^2}{1 + t^2}} \diff t
+      = 2\int \frac{1}{5 - 3t^2} \diff t
+    \]
+
+    И это табличный интеграл.
+
+    \medskip
+
+    \noindent
+    \emph{Способ 2: ``Преобразование единицы и двойной половинный''}.
+
+    Можно заметить, что есть возможность ``переписать'' знаменатель дроби как сумму/разность квадратов синуса и косинуса.
+    Сделаем это (а потом посмотрим, можно ли будет с этим что-то ещё сделать дальше).
+
+    Посмотрим на косинус как на косинус ``двойного половинного'' угла, а на единицу~---~как на сумму квадратов синуса и косинуса половинного угла:
+    \[
+      J = \int \frac{1}{\left(\sin^2 \frac{x}{2} + \cos^2 \frac{x}{2}\right) + 4\left(\cos^2 \frac{x}{2} - \sin^2 \frac{x}{2}\right)} \diff x
+      = \int \frac{1}{5 \cos^2 \frac{x}{2} - 3 \sin^2 \frac{x}{2}} \diff x = \spadesuit
+    \]
+
+    Если теперь вынести в знаменателе за скобку $\cos^2 \frac{x}{2}$ и потом занести $\frac{1}{\cos^2 \frac{x}{2}}$ под дифференциал, то снова придём к замене $\tg \frac{x}{2} \hm\equiv t$:
+    \[
+      \spadesuit = 2\int \frac{1}{5 - 3 \tg ^2 \frac{x}{2}} \cdot \frac{1}{\cos^2\frac{x}{2}} \diff \left(\frac{x}{2}\right) = 2 \int \frac{1}{5 - 3t^2} \diff t
+    \]
+  \end{solution}
+\end{document}
