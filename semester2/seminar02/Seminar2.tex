@@ -80,6 +80,15 @@
 \makeatother
 
 
+% https://tex.stackexchange.com/questions/142763/strikethrough-cyrillic-text-in-xetex-preserving-hyphenation
+% https://tex.stackexchange.com/a/142764/135045
+\makeatletter
+\font\SOUL@tt="Palatino Linotype"
+\setbox\z@\hbox{\SOUL@tt-}
+\SOUL@ttwidth\wd\z@
+\makeatother
+
+
 % https://tex.stackexchange.com/questions/279100/typeset-the-shrug-%C2%AF-%E3%83%84-%C2%AF-emoji
 \newcommand{\shrug}[1][]{%
 \begin{tikzpicture}[baseline,x=0.8\ht\strutbox,y=0.8\ht\strutbox,line width=0.125ex,#1]
@@ -288,11 +297,11 @@
         &= \frac{u}{2(1 - u^2)} + \frac{1}{4} \ln\left|1 - u\right| - \frac{1}{4} \ln\left|1 + u\right| + C\\
         &=  \frac{\sin t}{2(1 - \sin^2 t)} + \frac{1}{4} \ln\left(\frac{1 - \sin t}{1 + \sin t}\right) + C\\
         &= \frac{\sqrt{1 - \cos^2 t}}{2 \cos^2 t} + \frac{1}{4} \ln\left(\frac{1 - \sqrt{1 - \cos^2 t}}{1 + \sqrt{1 - \cos^2 t}}\right) + C\\
-        &= \frac{x \sqrt{x^2 - 1}}{2} + \frac{1}{4} \ln\left(\frac{x - \sqrt{x^2 - 1}}{x + \sqrt{x^2 - 1}}\right) + C
+        &= \frac{x \sqrt{x^2 - 1}}{2} + \frac{1}{4} \ln\left|\frac{x - \sqrt{x^2 - 1}}{x + \sqrt{x^2 - 1}}\right| + C
     \end{split}
     \end{equation*}
 
-    Но рассмотренная замена~---~не единственный возможные способ решения (и не единственная возможная ``решающая интеграл'' замена).
+    Но рассмотренная замена~---~не единственный возможный способ решения (и не единственная возможная ``решающая интеграл'' замена).
 
     \medskip
 
